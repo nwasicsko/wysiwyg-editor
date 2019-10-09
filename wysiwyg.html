@@ -1,0 +1,76 @@
+    <html>
+<head>
+	<style>
+	  .wrapper {
+	    border: 3px solid gray;
+	    border-radius: 3px;
+	  }
+		.editor
+        {
+			border:solid 1px #ccc;
+			padding: 20px;
+			min-height:200px;
+        }
+
+        .toolbar
+        {
+			border:solid 1px #ddd;
+			background:#f4f4f4;
+			padding: 5px;
+			border-radius:3px;
+        }
+
+        .toolbar > span
+        {
+			cursor:pointer;
+	}
+
+        .toolbar > span:hover
+        {
+			text-decoration:underline;
+	}
+	.form-control .urlbox {
+		text-align: right;
+		float:left;
+	}
+	</style>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="wrapper">
+    
+	<div class="toolbar">
+		<a href="javascript:void(0)" onclick="format('bold')"><b>B</b></a>
+		<a href="javascript:void(0)" onclick="format('italic')"><i>I</i></a>
+		<a href="javascript:void(0)" onclick="format('insertunorderedlist')">O</a>
+		<a href="javascript:void(0)" onclick="format('strikethrough')"><strike>S</strike></a>
+		<a href="javascript:void(0)" class="urlbox" onclick="setUrl()">a</a><br>
+		
+		<span><input id="txtFormatUrl" placeholder="url" value="https://" class="form-control"></span>
+</div>
+
+<div class="editor" id="editor">
+	</div>
+
+  </div>
+	<script>
+		window.addEventListener('load', function(){
+			document.getElementById('editor').setAttribute('contenteditable', 'true');
+			document.getElementById('editor2').setAttribute('contenteditable', 'true');
+        });
+
+		function format(command, value) {
+			document.execCommand(command, false, value);
+		}
+
+		function setUrl() {
+			var url = document.getElementById('txtFormatUrl').value;
+			var sText = document.getSelection();
+			document.execCommand('insertHTML', false, '<a href="' + url + '" target="_blank">' + sText + '</a>');
+			document.getElementById('txtFormatUrl').value = '';
+		}
+	</script>
+	
+</body>
+</html>
